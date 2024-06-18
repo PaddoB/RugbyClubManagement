@@ -1,0 +1,40 @@
+
+
+CREATE TABLE Players (
+    PlayerID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    DateOfBirth DATETIME,
+    IsActive BOOLEAN
+);
+
+CREATE TABLE Teams (
+    TeamID INT AUTO_INCREMENT PRIMARY KEY,
+    TeamName VARCHAR(50),
+    CoachName VARCHAR(50),
+    FoundedDate DATETIME
+);
+
+CREATE TABLE Matches (
+    MatchID INT AUTO_INCREMENT PRIMARY KEY,
+    MatchDate DATETIME,
+    Location VARCHAR(100)
+);
+
+CREATE TABLE MatchDetails (
+    MatchDetailID INT AUTO_INCREMENT PRIMARY KEY,
+    MatchID INT,
+    TeamID INT,
+    Points INT,
+    FOREIGN KEY (MatchID) REFERENCES Matches(MatchID),
+    FOREIGN KEY (TeamID) REFERENCES Teams(TeamID)
+);
+
+CREATE TABLE Registrations (
+    RegistrationID INT AUTO_INCREMENT PRIMARY KEY,
+    PlayerID INT,
+    TeamID INT,
+    RegistrationDate DATETIME,
+    FOREIGN KEY (PlayerID) REFERENCES Players(PlayerID),
+    FOREIGN KEY (TeamID) REFERENCES Teams(TeamID)
+);
